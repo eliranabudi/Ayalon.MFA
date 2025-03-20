@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="QRCoder.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Otp.NET">
+      <HintPath>Otp.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="QRCoder">
+      <HintPath>QRCoder.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\Ayalon.MFA.CredProvider\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Private.Windows.Core">
+      <HintPath>System.Private.Windows.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
