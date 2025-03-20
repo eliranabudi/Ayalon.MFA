@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{AC790E48-D761-42F5-8D08-E2B9823557B0}]
+@="Ayalon.MFA.CredProvider"
+
+[HKEY_CLASSES_ROOT\CLSID\{AC790E48-D761-42F5-8D08-E2B9823557B0}]
+@="Ayalon.MFA.CredProvider"
+"InprocServer32"="C:\\Windows\\System32\\AyalonMFA\\Ayalon.MFA.CredProvider.dll
