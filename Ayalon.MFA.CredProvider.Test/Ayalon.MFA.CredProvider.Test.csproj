@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ayalon.MFA.Core\Ayalon.MFA.Core.csproj" />
+    <ProjectReference Include="..\Ayalon.MFA.CredProvider\Ayalon.MFA.CredProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CredProvider.NET.Interop2">
+      <HintPath>..\midl\CredProvider.NET.Interop2.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing.Common">
+      <HintPath>..\Ayalon.MFA.CredProvider\System.Drawing.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
