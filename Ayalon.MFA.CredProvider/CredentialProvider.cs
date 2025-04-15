@@ -1,4 +1,4 @@
-﻿using Ayalon.MFA.Core;
+using Ayalon.MFA.Core;
 using CredProvider.NET.Interop2;
 using System;
 using System.Drawing;
