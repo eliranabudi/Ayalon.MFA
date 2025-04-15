@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -51,7 +51,7 @@ namespace Ayalon.MFA.CredProvider
             {
                 var filePath = GetFilePath();
 
-                Console.WriteLine(log);
+                //Console.WriteLine(log);
                 File.AppendAllText(filePath, log + Environment.NewLine);
             }
         }
@@ -60,11 +60,28 @@ namespace Ayalon.MFA.CredProvider
         {
             if (path == null)
             {
-                var folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.Windows)}\\Logs\\CredProviderNET";
+                var folder = $"{Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)}\\Logs\\Ayalon MFA";
 
-                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+                try
+                {
+                    if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+                }
+                catch (ArgumentNullException ex)
+                {
+                    throw new ArgumentNullException(ex.Message);
+                }
 
-                path = $"{folder}\\Log-{DateTime.Now.Ticks}.txt";
+                catch (DirectoryNotFoundException ex)
+                {
+                    throw new DirectoryNotFoundException(ex.Message);
+                }
+
+                catch (UnauthorizedAccessException ex)
+                {
+                    throw new UnauthorizedAccessException(ex.Message);
+                }
+
+                path = Path.Combine(folder, "AyalonMFALog.txt");
             }
 
             return path;
