@@ -117,7 +117,16 @@ namespace Ayalon.MFA.CredProvider
                         state: _CREDENTIAL_PROVIDER_FIELD_STATE.CPFS_DISPLAY_IN_DESELECTED_TILE
             );
 
-            string secretKey = GetSecretKey();
+            string secretKey;
+
+            try
+            {
+                secretKey = GetSecretKey();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
             if (File.Exists(secretKeyPath))
             {
