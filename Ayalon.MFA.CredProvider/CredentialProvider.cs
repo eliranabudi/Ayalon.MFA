@@ -60,7 +60,7 @@ namespace Ayalon.MFA.CredProvider
             credHandler = new CredHandler();
             qrCodeGenerator = new QrCodeGenerator();
 
-            appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
             secretKeyPath = Path.Combine(appDataPath, AppName, "secret.key");
         }
 
@@ -152,20 +152,28 @@ namespace Ayalon.MFA.CredProvider
 
         private string GetSecretKey()
         {
-            if (!File.Exists(secretKeyPath))
+
+            try
             {
-                return null;
+                if (!File.Exists(secretKeyPath))
+                {
+                    return null;
+                }
+
+                string encryptedSecretKey = File.ReadAllText(secretKeyPath);
+
+                if (string.IsNullOrEmpty(encryptedSecretKey))
+                {
+                    return null;
+                }
+
+                string secretKey = twoFactorAuth.DecryptSecretKey(encryptedSecretKey);
+                return secretKey;
             }
-
-            string encryptedSecretKey = File.ReadAllText(secretKeyPath);
-
-            if (string.IsNullOrEmpty(encryptedSecretKey))
+            catch (Exception ex)
             {
-                return null;
+                throw new ArgumentNullException(ex.Message);
             }
-
-            string secretKey = twoFactorAuth.DecryptSecretKey(encryptedSecretKey);
-            return secretKey;
         }
 
         private static bool IsSupportedScenario(_CREDENTIAL_PROVIDER_USAGE_SCENARIO cpus)
